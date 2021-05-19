@@ -13,6 +13,19 @@ public class Test {
                 new Enrollee("Petrenko", 50), new Enrollee("Potapenko", 70),
                 new Enrollee("Madyar", 85), new Enrollee("Kovalenko", 63),
                 new Enrollee("Antonenko", 62));
+
+        System.out.println();
+        System.out.println("==============================");
+        System.out.println();
+
+        enrollees.stream()
+                .sorted(Enrollee.enrolleeComparatorByRate.reversed())
+                .forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("==============================");
+        System.out.println();
+
         Test.otherEnrollee(enrollees, 1, 2);
 
         System.out.println();
@@ -20,7 +33,7 @@ public class Test {
         System.out.println();
 
         List<Enrollee> enrolleeList= Test.collectEnrollees(enrollees);
-        enrolleeList.stream()
+        enrolleeList
                 .forEach(System.out::println);
     }
 
@@ -34,9 +47,8 @@ public class Test {
     }
 
     public static List<Enrollee> collectEnrollees(Collection<Enrollee> enrollees){
-        List<Enrollee> finishEnrollee = enrollees.stream()
+        return enrollees.stream()
                 .filter((e) -> e.getRate()<60)
                 .collect(Collectors.toList());
-        return finishEnrollee;
     }
 }
