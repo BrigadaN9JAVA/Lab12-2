@@ -19,7 +19,7 @@ public class Test {
         System.out.println("==============================");
         System.out.println();
 
-        List<Enrollee> enrolleeList= Test.collectEnrollees(enrollees, 1, 2);
+        List<Enrollee> enrolleeList= Test.collectEnrollees(enrollees);
         enrolleeList.stream()
                 .forEach(System.out::println);
     }
@@ -30,10 +30,10 @@ public class Test {
                 .filter((e) -> e.getRate() >= 60)
                 .skip(placeForBudget+placeForContract)
                 .sorted(Enrollee.enrolleeComparatorByName)
-                .forEach(System.out::println);
+                .forEachOrdered(System.out::println);
     }
 
-    public static List<Enrollee> collectEnrollees(Collection<Enrollee> enrollees, int placeForContract, int placeForBudget){
+    public static List<Enrollee> collectEnrollees(Collection<Enrollee> enrollees){
         List<Enrollee> finishEnrollee = enrollees.stream()
                 .filter((e) -> e.getRate()<60)
                 .collect(Collectors.toList());
